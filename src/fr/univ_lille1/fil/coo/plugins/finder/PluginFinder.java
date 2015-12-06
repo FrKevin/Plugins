@@ -1,17 +1,24 @@
 package fr.univ_lille1.fil.coo.plugins.finder;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FilenameFilter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import fr.univ_lille1.fil.coo.plugins.filter.DefaultFilter;
+import fr.univ_lille1.fil.coo.plugins.listener.Listener;
 
-public class PluginFinder {
+public class PluginFinder implements ActionListener{
 	protected File directory;
 	protected FilenameFilter filter;
 	protected Set<File> files;
+	
+	protected List<Listener> listeners;
 	
 	public PluginFinder(File directory){
 		this(directory, new DefaultFilter());
@@ -21,6 +28,7 @@ public class PluginFinder {
 		this.directory = directory;
 		this.filter = filter;
 		this.files = listFiles();
+		this.listeners = new ArrayList<>();
 	}
 	
 	public Set<File> listFiles(){
@@ -29,6 +37,20 @@ public class PluginFinder {
 			return new HashSet<File>(Arrays.asList(files));
 		}
 		return new HashSet<File>();
+	}
+	
+	public void  addListener(Listener listener){
+		this.listeners.add(listener);
+	}
+	
+	public void removeListener(Listener listener){
+		this.listeners.remove(listener);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
