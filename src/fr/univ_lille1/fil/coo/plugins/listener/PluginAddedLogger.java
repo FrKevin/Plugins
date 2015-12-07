@@ -1,10 +1,13 @@
 package fr.univ_lille1.fil.coo.plugins.listener;
 
-public class PluginAddedLogger implements Listener {
+import java.util.List;
+
+import fr.univ_lille1.fil.coo.plugins.Plugin;
+
+public class PluginAddedLogger implements PluginListener {
 
 	@Override
-	public void update() {
+	public void pluginHasChenged(List<Plugin> p) {
 		System.out.println("logger");
 	}
-
 }

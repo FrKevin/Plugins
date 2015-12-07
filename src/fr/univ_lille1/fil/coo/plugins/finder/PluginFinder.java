@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Set;
 
 import fr.univ_lille1.fil.coo.plugins.filter.DefaultFilter;
-import fr.univ_lille1.fil.coo.plugins.listener.Listener;
+import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
 
 public class PluginFinder implements ActionListener{
 	protected File directory;
 	protected FilenameFilter filter;
 	protected Set<File> files;
 	
-	protected List<Listener> listeners;
+	protected List<PluginListener> listeners;
 	
 	public PluginFinder(File directory){
 		this(directory, new DefaultFilter());
@@ -39,18 +39,17 @@ public class PluginFinder implements ActionListener{
 		return new HashSet<File>();
 	}
 	
-	public void  addListener(Listener listener){
+	public void  addListener(PluginListener listener){
 		this.listeners.add(listener);
 	}
 	
-	public void removeListener(Listener listener){
+	public void removeListener(PluginListener listener){
 		this.listeners.remove(listener);
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 	
 }
