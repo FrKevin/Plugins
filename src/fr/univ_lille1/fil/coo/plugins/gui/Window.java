@@ -17,7 +17,6 @@ import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
 @SuppressWarnings("serial")
 public class Window extends JFrame implements PluginListener {
 	
-	private List<Plugin> plugins;
 
 	private JPanel contentPane;
 	private JMenu mnPlugins;
@@ -47,12 +46,12 @@ public class Window extends JFrame implements PluginListener {
 		
 		textArea = new JTextArea();
 		contentPane.add(textArea, BorderLayout.CENTER);
+
 		this.setVisible(true);
 	}
 
 	@Override
 	public void pluginHasChanged(List<Plugin> pls) {
-		plugins = pls;
 		mnPlugins.removeAll();
 		for (Plugin p : pls) {
 			JMenuItem it = new JMenuItem(p.getName());
