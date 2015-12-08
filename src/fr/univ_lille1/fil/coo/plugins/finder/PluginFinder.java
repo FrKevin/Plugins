@@ -27,7 +27,7 @@ public class PluginFinder implements ActionListener{
 	public PluginFinder(File directory, FilenameFilter filter){
 		this.directory = directory;
 		this.filter = filter;
-		this.files = listFiles();
+		//this.files = listFiles();
 		this.listeners = new ArrayList<>();
 	}
 	

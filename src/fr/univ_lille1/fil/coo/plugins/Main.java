@@ -11,7 +11,7 @@ public class Main {
 		PluginFinder finder = new PluginFinder(new File("external_class"));
 		System.out.println(finder.listFiles());
 		
-		Window frame = new Window();
+		//Window frame = new Window();
 	}
 	
 }

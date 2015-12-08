@@ -7,34 +7,54 @@ import java.lang.reflect.Constructor;
 import com.sun.webkit.plugin.Plugin;
 
 public class DefaultFilter implements FilenameFilter {
-
+	protected final String NAME_OF_PACKAGE = "plugins";
+	
 	@Override
 	public boolean accept(File dir, String name) {
 		if(!fileExtensionIsClass(name)){
 			return false;
 		}
-		Class<?> c = null;
-		try {
-			c = Class.forName(toClassName(name));
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+		Class<?> c = getClass(toClassName(name));
+		if(c == null ){
+			System.out.println("c == null ");
+			return false;
 		}
+		System.out.println("prout class c toString  "+ c.toString());
 		return  classInPackagePlugin(c) && classContructorsNoParameters(c) && inherFromPlugin(c);
 	}
 	
 	protected String toClassName(String name){
-		String[] s = name.split("\\.");
-		s = s[0].split("/");
-		return "plugins." + s[s.length-1];
+		System.out.println("toClassName() 1 "+ name );
+		String classname = name.replaceFirst("\\.class$", "");
+		System.out.println("toClassName() 2 "+ classname );
+		return NAME_OF_PACKAGE + "." + classname;
+	}
+	
+	
+	protected Class<?> getClass(String className){
+		try {
+			System.out.println("getClass() " + className);
+			return Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	protected boolean fileExtensionIsClass(String name){
-		return name.toLowerCase().endsWith(".class");
+		return name.endsWith(".class");
 	}
 		
 	
 	protected boolean classInPackagePlugin(Class<?> c){
-		return c.getPackage().getName().equals("plugins");
+		System.out.println("prout classInPackagePlugin()");
+		System.out.println(" c= "+ c);
+		Package p = c.getPackage();
+		if(p == null ) {
+			return false;
+		}
+		System.out.println("prout classInPackagePlugin() 2 "+ p);
+		return c.getPackage().getName().equals(NAME_OF_PACKAGE);
 	}
 	
 	protected boolean inherFromPlugin(Class<?> c){
@@ -42,6 +62,7 @@ public class DefaultFilter implements FilenameFilter {
 	}
 	
 	protected boolean classContructorsNoParameters(Class<?> c){
+		System.out.println("prout classContructorsNoParameters()");
 		Constructor<?>[] cos = c.getConstructors();
 		for(Constructor<?> constructor : cos){
 			if (constructor.getParameterCount() == 0){
