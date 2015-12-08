@@ -45,7 +45,9 @@ public class Window extends JFrame implements PluginListener {
 		mnPlugins.add(mntmPluginItem);
 		
 		textArea = new JTextArea();
-		contentPane.add(textArea, BorderLayout.SOUTH);
+		contentPane.add(textArea, BorderLayout.CENTER);
+		
+		setVisible(true);
 	}
 
 	@Override
