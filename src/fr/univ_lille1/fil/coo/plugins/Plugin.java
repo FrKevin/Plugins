@@ -1,5 +1,8 @@
 package fr.univ_lille1.fil.coo.plugins;
 
-public class Plugin {
-
+public interface Plugin {
+	
+	public String getName();
+	
+	public String transformText(String text);
 }
