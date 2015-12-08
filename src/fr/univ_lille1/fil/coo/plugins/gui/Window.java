@@ -1,20 +1,18 @@
 package fr.univ_lille1.fil.coo.plugins.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import fr.univ_lille1.fil.coo.plugins.Plugin;
 import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
-import javax.swing.JMenuBar;
-import javax.swing.JEditorPane;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JTextArea;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame implements PluginListener {
@@ -48,7 +46,8 @@ public class Window extends JFrame implements PluginListener {
 		mnPlugins.add(mntmPluginItem);
 		
 		textArea = new JTextArea();
-		contentPane.add(textArea, BorderLayout.SOUTH);
+		contentPane.add(textArea, BorderLayout.CENTER);
+		this.setVisible(true);
 	}
 
 	@Override
