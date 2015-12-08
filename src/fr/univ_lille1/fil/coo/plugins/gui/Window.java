@@ -1,7 +1,6 @@
 package fr.univ_lille1.fil.coo.plugins.gui;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -11,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 import fr.univ_lille1.fil.coo.plugins.Plugin;
 import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
 import javax.swing.JMenuBar;
-import javax.swing.JEditorPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JTextArea;
@@ -19,7 +17,6 @@ import javax.swing.JTextArea;
 @SuppressWarnings("serial")
 public class Window extends JFrame implements PluginListener {
 	
-	private List<Plugin> plugins;
 
 	private JPanel contentPane;
 	private JMenu mnPlugins;
@@ -53,7 +50,6 @@ public class Window extends JFrame implements PluginListener {
 
 	@Override
 	public void pluginHasChanged(List<Plugin> pls) {
-		plugins = pls;
 		mnPlugins.removeAll();
 		for (Plugin p : pls) {
 			JMenuItem it = new JMenuItem(p.getName());
