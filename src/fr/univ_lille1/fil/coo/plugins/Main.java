@@ -12,6 +12,7 @@ public class Main {
 		System.out.println(finder.listFiles());
 		//System.out.println(new plugins.ToLowercasePlugin());
 		Window frame = new Window();
+		finder.addListener(frame);
 	}
 	
 }

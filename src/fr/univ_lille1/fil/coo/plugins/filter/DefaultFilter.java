@@ -75,6 +75,4 @@ public class DefaultFilter implements FilenameFilter {
 		}
 		return false;
 	}
-	
-	
 }
