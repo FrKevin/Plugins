@@ -40,18 +40,13 @@ public class PluginFinder extends TimerTask{
 	
 	public List<Plugin> toListPlugin(Set<File> files) {
 		List<Plugin> plugins = new ArrayList<>();
-
 		for(File f : files) {
 			String clearName = f.getName().replaceFirst("dropin/plugins/", "").replaceFirst("\\.class$", "");
 			Plugin plugin = null;
-			System.out.println("plugins." + clearName);
 			try {
 				plugin = (Plugin) Class.forName("plugins." + clearName).newInstance();
-			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-			plugins.add(plugin);
-
+				plugins.add(plugin);
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {}
 		}
 		return plugins;
 	}

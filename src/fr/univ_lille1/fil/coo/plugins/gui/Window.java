@@ -88,7 +88,6 @@ public class Window extends JFrame implements PluginListener {
 	public void pluginHasChanged(List<Plugin> pls) {
 		mnPlugins.removeAll();
 		for (Plugin p : pls) {
-			System.out.println(p);
 			JMenuItem it = new JMenuItem(p.getLabel());
 			it.addActionListener((event) -> {
 				textArea.setText(p.transform(textArea.getText()));
