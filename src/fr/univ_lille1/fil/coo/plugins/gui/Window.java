@@ -1,8 +1,6 @@
 package fr.univ_lille1.fil.coo.plugins.gui;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -13,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
 
 import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
 import plugins.Plugin;
