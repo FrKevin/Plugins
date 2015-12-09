@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.lang.reflect.Constructor;
 
-import com.sun.webkit.plugin.Plugin;
+import plugins.Plugin;
+
+
 
 public class DefaultFilter implements FilenameFilter {
 	protected final String NAME_OF_PACKAGE = "plugins";
@@ -32,9 +34,11 @@ public class DefaultFilter implements FilenameFilter {
 	
 	
 	protected Class<?> getClass(String className){
-		try {
+		try { 
 			System.out.println("getClass() " + className);
-			return Class.forName(className);
+			Class<?> c = Class.forName(className);
+			System.out.println(c);
+			return c;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			return null;

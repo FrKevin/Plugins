@@ -11,8 +11,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
-import fr.univ_lille1.fil.coo.plugins.Plugin;
 import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
+import plugins.Plugin;
 
 @SuppressWarnings("serial")
 public class Window extends JFrame implements PluginListener {
@@ -54,9 +54,9 @@ public class Window extends JFrame implements PluginListener {
 	public void pluginHasChanged(List<Plugin> pls) {
 		mnPlugins.removeAll();
 		for (Plugin p : pls) {
-			JMenuItem it = new JMenuItem(p.getName());
+			JMenuItem it = new JMenuItem(p.getLabel());
 			it.addActionListener((event) -> {
-				textArea.setText(p.transformText(textArea.getText()));
+				textArea.setText(p.transform(textArea.getText()));
 			});
 		}
 	}
