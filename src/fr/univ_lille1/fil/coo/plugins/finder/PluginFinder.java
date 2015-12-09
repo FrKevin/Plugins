@@ -12,11 +12,11 @@ import java.util.Set;
 
 import fr.univ_lille1.fil.coo.plugins.filter.DefaultFilter;
 import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
+import plugins.Plugin;
 
-public class PluginFinder implements ActionListener{
+public class PluginFinder {
 	protected File directory;
 	protected FilenameFilter filter;
-	protected Set<File> files;
 	
 	protected List<PluginListener> listeners;
 	
@@ -27,7 +27,6 @@ public class PluginFinder implements ActionListener{
 	public PluginFinder(File directory, FilenameFilter filter){
 		this.directory = directory;
 		this.filter = filter;
-		//this.files = listFiles();
 		this.listeners = new ArrayList<>();
 	}
 	
@@ -39,17 +38,30 @@ public class PluginFinder implements ActionListener{
 		return new HashSet<File>();
 	}
 	
-	public void  addListener(PluginListener listener){
+	public List<Plugin> toListPlugin(Set<File> files) {
+		List<Plugin> plugins = new ArrayList<>();
+
+		for(File f : files) {
+			String clearName = f.getName().replaceFirst("dropin/plugins/", "").replaceFirst("\\.class$", "");
+			Plugin plugin = null;
+			System.out.println("plugins." + clearName);
+			try {
+				plugin = (Plugin) Class.forName("plugins." + clearName).newInstance();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			plugins.add(plugin);
+
+		}
+		return plugins;
+	}
+	
+	public void addListener(PluginListener listener){
 		this.listeners.add(listener);
 	}
 	
 	public void removeListener(PluginListener listener){
 		this.listeners.remove(listener);
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 	}
 	
 }

@@ -10,8 +10,8 @@ public class Main {
 	public static void main(String[] args) {
 		PluginFinder finder = new PluginFinder(new File("droping/plugins"));
 		System.out.println(finder.listFiles());
-		//System.out.println(new plugins.ToLowercasePlugin());
 		Window frame = new Window();
+		finder.addListener(frame);
 	}
 	
 }
