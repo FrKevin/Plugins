@@ -47,7 +47,7 @@ public class Window extends JFrame implements PluginListener {
 		setTitle("TP Plugin");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 100, 100);
+		setBounds(100, 100, 500, 300);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
