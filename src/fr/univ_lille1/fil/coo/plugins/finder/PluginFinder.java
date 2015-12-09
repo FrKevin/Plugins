@@ -67,7 +67,7 @@ public class PluginFinder extends TimerTask{
 	@Override
 	public void run() {
 		Set<File> files = listFiles();
-		List<Plugin> allPlugins = null; //TODO convertir file into plugin
+		List<Plugin> allPlugins = toListPlugin(files); 
 		for(PluginListener listener: listeners){
 			listener.pluginHasChanged(allPlugins);
 		}
