@@ -2,7 +2,7 @@ package fr.univ_lille1.fil.coo.plugins.listener;
 
 import java.util.List;
 
-import fr.univ_lille1.fil.coo.plugins.Plugin;
+import plugins.Plugin;
 
 public class PluginAddedLogger implements PluginListener {
 

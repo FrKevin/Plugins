@@ -4,15 +4,16 @@ import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-
-import fr.univ_lille1.fil.coo.plugins.Plugin;
-import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
-import javax.swing.JMenuBar;
 import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
+
+import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
+import plugins.Plugin;
+
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
@@ -86,9 +87,9 @@ public class Window extends JFrame implements PluginListener {
 	public void pluginHasChanged(List<Plugin> pls) {
 		mnPlugins.removeAll();
 		for (Plugin p : pls) {
-			JMenuItem it = new JMenuItem(p.getName());
+			JMenuItem it = new JMenuItem(p.getLabel());
 			it.addActionListener((event) -> {
-				textArea.setText(p.transformText(textArea.getText()));
+				textArea.setText(p.transform(textArea.getText()));
 			});
 		}
 	}
