@@ -10,6 +10,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+
 import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
 import plugins.Plugin;
 
@@ -87,13 +88,14 @@ public class Window extends JFrame implements PluginListener {
 	public void pluginHasChanged(List<Plugin> pls) {
 		mnPlugins.removeAll();
 		for (Plugin p : pls) {
+			System.out.println(p);
 			JMenuItem it = new JMenuItem(p.getLabel());
 			it.addActionListener((event) -> {
 				textArea.setText(p.transform(textArea.getText()));
 			});
+			mnPlugins.add(it);
 		}
 	}
-	
 	
 	
 	

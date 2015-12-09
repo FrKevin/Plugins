@@ -13,6 +13,7 @@ import fr.univ_lille1.fil.coo.plugins.filter.DefaultFilter;
 import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
 import plugins.Plugin;
 
+
 public class PluginFinder extends TimerTask{
 	protected File directory;
 	protected FilenameFilter filter;
@@ -37,7 +38,25 @@ public class PluginFinder extends TimerTask{
 		return new HashSet<File>();
 	}
 	
-	public void  addListener(PluginListener listener){
+	public List<Plugin> toListPlugin(Set<File> files) {
+		List<Plugin> plugins = new ArrayList<>();
+
+		for(File f : files) {
+			String clearName = f.getName().replaceFirst("dropin/plugins/", "").replaceFirst("\\.class$", "");
+			Plugin plugin = null;
+			System.out.println("plugins." + clearName);
+			try {
+				plugin = (Plugin) Class.forName("plugins." + clearName).newInstance();
+			} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+			plugins.add(plugin);
+
+		}
+		return plugins;
+	}
+	
+	public void addListener(PluginListener listener){
 		this.listeners.add(listener);
 	}
 	
