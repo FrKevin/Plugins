@@ -8,6 +8,6 @@ public class PluginAddedLogger implements PluginListener {
 
 	@Override
 	public void pluginHasChanged(List<Plugin> p) {
-		System.out.println("logger");
+		System.out.println("update");
 	}
 }

@@ -19,6 +19,8 @@ public class PluginFinder extends TimerTask{
 	protected FilenameFilter filter;
 	
 	protected List<PluginListener> listeners;
+	protected Set<File> files = new HashSet<>();
+	protected boolean hasChanged;
 	
 	public PluginFinder(File directory){
 		this(directory, new DefaultFilter());
@@ -58,13 +60,31 @@ public class PluginFinder extends TimerTask{
 	public void removeListener(PluginListener listener){
 		this.listeners.remove(listener);
 	}
-
-	@Override
-	public void run() {
-		Set<File> files = listFiles();
+	
+	protected void setFiles(Set<File> newFiles){
+		if( !files.equals(newFiles)) {
+			files =  newFiles;
+			hasChanged = true;
+		}
+	}
+	
+	protected boolean hasChangedFiles(){
+		return hasChanged;
+	}
+	
+	protected void notifyPluginListener(){
 		List<Plugin> allPlugins = toListPlugin(files); 
 		for(PluginListener listener: listeners){
 			listener.pluginHasChanged(allPlugins);
+		}
+		hasChanged = false;
+	}
+	
+	@Override
+	public void run() {
+		setFiles(listFiles());
+		if(hasChangedFiles()){
+			notifyPluginListener();
 		}
 	}
 }
