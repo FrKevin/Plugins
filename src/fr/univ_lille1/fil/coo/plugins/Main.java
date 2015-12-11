@@ -10,11 +10,14 @@ import fr.univ_lille1.fil.coo.plugins.listener.PluginAddedLogger;
 public class Main {
 
 	public static void main(String[] args) {
-		PluginFinder finder = new PluginFinder(new File("droping/plugins"));
+		File classPathDirectory = new File("droping");
+		File pluginDirectory = new File(classPathDirectory, "plugins");
+		
+		PluginFinder finder = new PluginFinder(classPathDirectory, pluginDirectory);
 		Window frame = new Window();
 		finder.addListener(frame);
 		finder.addListener(new PluginAddedLogger());
-		new Timer().schedule(finder, 1000, 5000);
+		new Timer().schedule(finder, 100, 2000);
 	}
 	
 }

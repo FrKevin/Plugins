@@ -10,7 +10,12 @@ import plugins.Plugin;
 
 public class DefaultFilter implements FilenameFilter {
 	protected final String NAME_OF_PACKAGE = "plugins";
+	protected ClassLoader classLoader;
 	
+	public DefaultFilter(ClassLoader classLoader) {
+		this.classLoader = classLoader;
+	}
+
 	@Override
 	public boolean accept(File dir, String name) {
 		if(!fileExtensionIsClass(name)){
@@ -31,7 +36,8 @@ public class DefaultFilter implements FilenameFilter {
 	
 	protected Class<?> getClass(String className){
 		try { 
-			Class<?> c = Class.forName(className);
+			
+			Class<?> c = classLoader.loadClass(className);
 			return c;
 		} catch (ClassNotFoundException e) {
 			return null;
