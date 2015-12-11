@@ -69,8 +69,8 @@ public class DefaultFilter implements FilenameFilter {
 	}
 		
 	/**
-	 * Verify that the binary is on the right package
-	 * @param name The name of the binary to verify
+	 * Verify that the class is on the right package
+	 * @param c The class to verify
 	 * @return True if it's in the right package false in other cases
 	 */
 	protected boolean classInPackagePlugin(Class<?> c){

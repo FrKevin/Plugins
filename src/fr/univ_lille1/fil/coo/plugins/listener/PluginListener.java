@@ -10,6 +10,7 @@ import plugins.Plugin;
 public interface PluginListener{
 	/**
 	 * Performed actions if the {@link Plugin}s has changed
+	 * @param p The list of the plugins
 	 */
 	public void pluginHasChanged(List<Plugin> p);
 }
