@@ -16,7 +16,9 @@ import fr.univ_lille1.fil.coo.plugins.filter.DefaultFilter;
 import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
 import plugins.Plugin;
 
-
+/**
+ * This class is used to set the directory where to find {@link Plugin}s
+ */
 public class PluginFinder extends TimerTask{
 	protected File searchDirectory;
 	protected FilenameFilter filter;
@@ -27,6 +29,11 @@ public class PluginFinder extends TimerTask{
 	
 	protected ClassLoader classLoader;
 	
+	/**
+	 * Constructor of the {@link PluginFinder} class
+	 * @param classPathDirectory The folder where to find the plugin folder
+	 * @param searchDirectory The folder where to search
+	 */
 	@SuppressWarnings("deprecation")
 	public PluginFinder(File classPathDirectory, File searchDirectory){
 		this.searchDirectory = searchDirectory;
@@ -49,6 +56,10 @@ public class PluginFinder extends TimerTask{
 		System.out.println("Be carefull : plugin classes have to be declared in package 'plugins'");
 	}
 	
+	/**
+	 * Generate a Set of the {@link Plugin}s availables in the search directory
+	 * @return The files that are corresponding to the filter
+	 */
 	public Set<File> listFiles(){
 		File[] files = searchDirectory.listFiles(filter);
 		if(files != null){
@@ -57,6 +68,11 @@ public class PluginFinder extends TimerTask{
 		return new HashSet<File>();
 	}
 	
+	/**
+	 * Generate the list of {@link Plugin}s availables
+	 * @param files the name of the {@link Plugin}s to instantiate the corresponding classes
+	 * @return The list of {@link Plugin}s availables
+	 */
 	public List<Plugin> toListPlugin(Set<File> files) {
 		List<Plugin> plugins = new ArrayList<>();
 		for(File f : files) {
@@ -70,14 +86,26 @@ public class PluginFinder extends TimerTask{
 		return plugins;
 	}
 	
+	/**
+	 * Add a listener to the finder
+	 * @param listener the listener to add
+	 */
 	public void addListener(PluginListener listener){
 		this.listeners.add(listener);
 	}
 	
+	/**
+	 * Remove a listener to the finder
+	 * @param listener the listener to remove
+	 */
 	public void removeListener(PluginListener listener){
 		this.listeners.remove(listener);
 	}
 	
+	/**
+	 * Verify if the files have changed
+	 * @param newFiles The new list of files
+	 */
 	protected void setFiles(Set<File> newFiles){
 		if( !files.equals(newFiles)) {
 			files =  newFiles;
@@ -85,10 +113,17 @@ public class PluginFinder extends TimerTask{
 		}
 	}
 	
+	/**
+	 * Return the state of the folder containing {@link Plugin}s files
+	 * @return True if the folder have changer (add or remove plugin) false in other cases
+	 */
 	protected boolean hasChangedFiles(){
 		return hasChanged;
 	}
 	
+	/**
+	 * Notify all plugin listeners
+	 */
 	protected void notifyPluginListener(){
 		List<Plugin> allPlugins = toListPlugin(files); 
 		for(PluginListener listener: listeners){
