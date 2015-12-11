@@ -15,7 +15,6 @@ import fr.univ_lille1.fil.coo.plugins.listener.PluginListener;
 import plugins.Plugin;
 
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
@@ -30,19 +29,10 @@ public class Window extends JFrame implements PluginListener {
 	private JMenuItem mntmPropos;
 
 
-	public static void main(String[] args) {
-		new Window();
-	}
 	/**
 	 * Create the frame.
 	 */
 	public Window() {
-		try {
-			// donne à l'interface graphique le thème associé au système d'exploitation
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
 		setTitle("TP Plugin");
 		
