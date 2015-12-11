@@ -39,12 +39,6 @@ public class PluginFinder extends TimerTask{
 		this.searchDirectory = searchDirectory;
 		this.listeners = new ArrayList<>();
 		
-		try {
-			classLoader = new URLClassLoader(new URL[] {classPathDirectory.toURL()});
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
-		this.filter = new DefaultFilter(classLoader);
 		
 		if (!searchDirectory.exists()) {
 			searchDirectory.mkdirs();
@@ -52,6 +46,12 @@ public class PluginFinder extends TimerTask{
 		else if (!searchDirectory.isDirectory()) {
 			throw new IllegalArgumentException("File '"+searchDirectory+"' is not a directory");
 		}
+		try {
+			classLoader = new URLClassLoader(new URL[] {classPathDirectory.toURL()});
+		} catch (MalformedURLException e) {
+			throw new RuntimeException(e);
+		}
+		this.filter = new DefaultFilter(classLoader);
 		System.out.println("Please add some plugin class into '"+searchDirectory+"' directory");
 		System.out.println("Be carefull : plugin classes have to be declared in package 'plugins'");
 	}
